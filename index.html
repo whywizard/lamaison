@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Maison Della Bellezza — Bologna</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --terracotta: #C4693A;
+    --terra-light: #E8A882;
+    --cream: #FAF6F0;
+    --warm-white: #FDF9F4;
+    --espresso: #2C1A0E;
+    --latte: #C4A882;
+    --sage: #8A9E7A;
+    --stone: #9A8878;
+    --parchment: #F2EBE0;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Raleway', sans-serif;
+    background: var(--warm-white);
+    color: var(--espresso);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.4rem 4rem;
+    background: rgba(253,249,244,0.93);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(196,105,58,0.12);
+  }
+  .nav-logo {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.1rem; font-weight: 700;
+    color: var(--espresso); letter-spacing: 0.03em;
+    line-height: 1.2;
+  }
+  .nav-logo span { display: block; font-size: 0.65rem; font-weight: 400; letter-spacing: 0.2em; text-transform: uppercase; color: var(--terracotta); font-family: 'Raleway', sans-serif; }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    text-decoration: none; font-size: 0.78rem;
+    font-weight: 500; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--espresso);
+    opacity: 0.6; transition: opacity 0.2s, color 0.2s;
+  }
+  .nav-links a:hover { opacity: 1; color: var(--terracotta); }
+  .nav-book {
+    background: var(--terracotta); color: white;
+    padding: 0.65rem 1.8rem;
+    font-size: 0.75rem; font-weight: 600;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    text-decoration: none; border-radius: 2px;
+    transition: background 0.2s, transform 0.2s;
+    box-shadow: 0 4px 14px rgba(196,105,58,0.25);
+  }
+  .nav-book:hover { background: #B05A2E; transform: translateY(-1px); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    padding-top: 80px;
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .hero-left {
+    padding: 5rem 4rem 4rem;
+    display: flex; flex-direction: column; justify-content: center;
+    position: relative; z-index: 2;
+    animation: fadeUp 1s ease both;
+  }
+
+  /* Italian decorative element */
+  .hero-ornament {
+    display: flex; align-items: center; gap: 1rem;
+    margin-bottom: 2.5rem;
+  }
+  .ornament-line { flex: 0 0 50px; height: 1px; background: var(--latte); }
+  .ornament-text {
+    font-size: 0.68rem; letter-spacing: 0.25em;
+    text-transform: uppercase; color: var(--terracotta);
+    white-space: nowrap; font-weight: 600;
+  }
+  .ornament-diamond { width: 6px; height: 6px; background: var(--terracotta); transform: rotate(45deg); flex-shrink: 0; }
+
+  .hero-h1 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: clamp(3rem, 5.5vw, 6.5rem);
+    font-weight: 700; line-height: 0.92;
+    margin-bottom: 0.5rem;
+    color: var(--espresso);
+    letter-spacing: -0.02em;
+  }
+  .hero-h1 em { font-style: italic; color: var(--terracotta); display: block; }
+  .hero-h1 .small { font-size: 0.38em; font-weight: 400; letter-spacing: 0.08em; color: var(--stone); display: block; margin-top: 0.8rem; font-family: 'Raleway', sans-serif; text-transform: uppercase; }
+
+  .hero-divider {
+    width: 60px; height: 2px;
+    background: linear-gradient(90deg, var(--terracotta), var(--latte));
+    margin: 2rem 0;
+  }
+
+  .hero-p {
+    font-size: 0.95rem; line-height: 1.9;
+    color: var(--stone); max-width: 420px;
+    margin-bottom: 2.8rem;
+  }
+  .hero-p strong { color: var(--espresso); font-weight: 600; }
+
+  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 3.5rem; }
+  .btn-terra {
+    background: var(--terracotta); color: white;
+    padding: 1rem 2.2rem; font-size: 0.8rem;
+    font-weight: 600; letter-spacing: 0.12em;
+    text-transform: uppercase; text-decoration: none;
+    border-radius: 2px;
+    box-shadow: 0 6px 20px rgba(196,105,58,0.3);
+    transition: all 0.2s;
+  }
+  .btn-terra:hover { background: #B05A2E; transform: translateY(-2px); box-shadow: 0 10px 28px rgba(196,105,58,0.4); }
+  .btn-ghost {
+    border: 1.5px solid rgba(44,26,14,0.25);
+    color: var(--espresso); padding: 1rem 2.2rem;
+    font-size: 0.8rem; font-weight: 500;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    text-decoration: none; border-radius: 2px;
+    transition: all 0.2s;
+  }
+  .btn-ghost:hover { border-color: var(--terracotta); color: var(--terracotta); }
+
+  .hero-meta {
+    display: flex; gap: 3rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid rgba(196,105,58,0.12);
+  }
+  .meta-item { }
+  .meta-val {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.6rem; font-weight: 700;
+    color: var(--terracotta); line-height: 1;
+  }
+  .meta-label { font-size: 0.72rem; color: var(--stone); margin-top: 0.3rem; letter-spacing: 0.06em; }
+
+  /* Hero right - Italian inspired mosaic */
+  .hero-right {
+    position: relative; background: var(--parchment);
+    overflow: hidden;
+    animation: fadeIn 1.2s ease both 0.4s;
+  }
+  .hero-right::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 80%, rgba(196,105,58,0.15) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 20%, rgba(138,158,122,0.1) 0%, transparent 50%);
+  }
+  .hero-mosaic {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    height: 100%; gap: 4px; padding: 4px;
+    position: relative; z-index: 1;
+  }
+  .mosaic-block {
+    border-radius: 4px; overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 3rem; position: relative;
+    transition: transform 0.4s;
+  }
+  .mosaic-block:hover { transform: scale(0.98); }
+  .mosaic-block:nth-child(1) { grid-row: 1 / 3; background: linear-gradient(145deg, #E8D5C0, #D4B898); border-radius: 4px 4px 80px 4px; }
+  .mosaic-block:nth-child(2) { background: linear-gradient(145deg, #C4D4BC, #A8C0A0); }
+  .mosaic-block:nth-child(3) { background: linear-gradient(145deg, #E8C4A8, #D4A882); }
+  .mosaic-block:nth-child(4) { grid-column: 1 / 3; background: linear-gradient(145deg, #D4C4B0, #C0A890); border-radius: 4px 4px 4px 80px; }
+
+  .mosaic-label {
+    position: absolute; bottom: 0.8rem; left: 0.8rem;
+    background: rgba(253,249,244,0.88); backdrop-filter: blur(8px);
+    font-size: 0.65rem; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 0.3rem 0.7rem; border-radius: 2px;
+    color: var(--espresso);
+  }
+
+  /* MARQUEE */
+  .marquee-wrap {
+    background: var(--espresso);
+    color: rgba(253,249,244,0.7);
+    padding: 0.85rem 0; overflow: hidden; white-space: nowrap;
+  }
+  .marquee-inner {
+    display: inline-block;
+    animation: marquee 22s linear infinite;
+    font-size: 0.72rem; font-weight: 500;
+    letter-spacing: 0.2em; text-transform: uppercase;
+  }
+  .marquee-inner span { margin: 0 2rem; color: var(--terracotta); font-size: 0.8rem; }
+
+  /* SERVICES */
+  .services {
+    padding: 7rem 4rem;
+    background: var(--cream);
+  }
+  .section-ornament {
+    display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;
+  }
+  .section-ornament::before { content: ''; width: 30px; height: 1px; background: var(--terracotta); }
+  .section-tag {
+    font-size: 0.68rem; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--terracotta); font-weight: 600;
+  }
+  .section-h2 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: clamp(2rem, 3.5vw, 3.2rem);
+    font-weight: 700; line-height: 1.1;
+    margin-bottom: 0.5rem; letter-spacing: -0.02em;
+  }
+  .section-h2 em { font-style: italic; color: var(--terracotta); }
+  .section-sub {
+    font-size: 0.9rem; color: var(--stone);
+    margin-bottom: 3.5rem; max-width: 500px; line-height: 1.7;
+  }
+
+  .services-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+  }
+  .service-card {
+    background: white;
+    border-radius: 8px; padding: 2.5rem 2rem;
+    border: 1px solid rgba(196,105,58,0.1);
+    position: relative; overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+    opacity: 0; transform: translateY(20px);
+  }
+  .service-card.visible { opacity: 1; transform: translateY(0); }
+  .service-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(44,26,14,0.1);
+    border-color: rgba(196,105,58,0.3);
+  }
+  .service-card::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--terracotta), var(--latte));
+    transform: scaleX(0); transition: transform 0.3s;
+    transform-origin: left;
+  }
+  .service-card:hover::after { transform: scaleX(1); }
+  .service-num {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 3.5rem; font-weight: 700;
+    color: rgba(196,105,58,0.1); line-height: 1;
+    margin-bottom: 1rem; letter-spacing: -0.03em;
+  }
+  .service-icon { font-size: 2rem; margin-bottom: 1rem; }
+  .service-name {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.15rem; font-weight: 700;
+    margin-bottom: 0.6rem;
+  }
+  .service-desc { font-size: 0.83rem; line-height: 1.7; color: var(--stone); margin-bottom: 1.2rem; }
+  .service-price { font-size: 0.78rem; font-weight: 600; color: var(--terracotta); letter-spacing: 0.08em; }
+
+  /* ABOUT */
+  .about {
+    padding: 7rem 4rem;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 6rem; align-items: center;
+  }
+  .about-img {
+    background: var(--parchment);
+    border-radius: 8px 8px 80px 8px;
+    height: 520px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 8rem; position: relative; overflow: hidden;
+  }
+  .about-img::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at 30% 70%, rgba(196,105,58,0.15) 0%, transparent 60%);
+  }
+  .about-badge {
+    position: absolute; bottom: -1rem; right: -1rem;
+    background: var(--terracotta); color: white;
+    width: 110px; height: 110px; border-radius: 50%;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    box-shadow: 0 8px 24px rgba(196,105,58,0.4);
+  }
+  .about-badge .num {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.8rem; font-weight: 700; line-height: 1;
+  }
+  .about-badge .txt { font-size: 0.5rem; letter-spacing: 0.1em; text-transform: uppercase; text-align: center; opacity: 0.9; }
+
+  .about-content h2 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: clamp(2rem, 3vw, 3rem);
+    font-weight: 700; line-height: 1.15;
+    margin-bottom: 1.5rem; letter-spacing: -0.02em;
+  }
+  .about-content h2 em { font-style: italic; color: var(--terracotta); }
+  .about-content p {
+    font-size: 0.92rem; line-height: 1.9;
+    color: var(--stone); margin-bottom: 1.2rem;
+  }
+  .about-features { margin-top: 2rem; display: flex; flex-direction: column; gap: 1rem; }
+  .feature {
+    display: flex; gap: 1rem; align-items: flex-start;
+  }
+  .feature-dot {
+    width: 8px; height: 8px; background: var(--terracotta);
+    border-radius: 50%; flex-shrink: 0; margin-top: 0.4rem;
+  }
+  .feature p { font-size: 0.85rem; line-height: 1.6; color: var(--espresso); margin: 0; }
+
+  /* TEAM */
+  .team {
+    padding: 7rem 4rem;
+    background: var(--espresso); color: var(--cream);
+    text-align: center;
+  }
+  .team .section-ornament { justify-content: center; }
+  .team .section-ornament::before { background: var(--terra-light); }
+  .team .section-tag { color: var(--terra-light); }
+  .team .section-h2 { color: var(--cream); margin: 0 auto 0.5rem; }
+  .team .section-h2 em { color: var(--terra-light); }
+  .team .section-sub { color: rgba(250,246,240,0.55); margin: 0 auto 3.5rem; text-align: center; }
+
+  .team-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem; max-width: 800px; margin: 0 auto;
+  }
+  .team-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(196,105,58,0.2);
+    border-radius: 8px; padding: 2.5rem 1.5rem;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+  .team-card:hover { border-color: rgba(196,105,58,0.5); transform: translateY(-4px); }
+  .team-avatar {
+    width: 72px; height: 72px; border-radius: 50%;
+    margin: 0 auto 1.2rem;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2rem; background: rgba(196,105,58,0.15);
+    border: 2px solid rgba(196,105,58,0.3);
+  }
+  .team-name {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1rem; font-weight: 700;
+    color: var(--cream); margin-bottom: 0.3rem;
+  }
+  .team-role { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--terra-light); margin-bottom: 0.8rem; }
+  .team-desc { font-size: 0.8rem; line-height: 1.6; color: rgba(250,246,240,0.5); }
+
+  /* REVIEWS */
+  .reviews { padding: 7rem 4rem; background: var(--parchment); }
+  .reviews-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem; margin-top: 3.5rem;
+  }
+  .review-card {
+    background: white; border-radius: 8px;
+    padding: 2.2rem; border: 1px solid rgba(196,105,58,0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+  }
+  .review-card:hover { transform: translateY(-4px); box-shadow: 0 16px 32px rgba(44,26,14,0.08); }
+  .review-quote {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 4rem; line-height: 0.5;
+    color: rgba(196,105,58,0.15);
+    margin-bottom: 1rem;
+  }
+  .review-stars { color: var(--terracotta); font-size: 0.85rem; letter-spacing: 2px; margin-bottom: 1rem; }
+  .review-text { font-size: 0.87rem; line-height: 1.75; color: var(--stone); margin-bottom: 1.5rem; font-style: italic; }
+  .review-author { font-size: 0.8rem; font-weight: 600; color: var(--espresso); }
+  .review-city { font-size: 0.72rem; color: var(--terracotta); letter-spacing: 0.08em; }
+
+  /* BOOKING */
+  .booking {
+    padding: 7rem 4rem; background: var(--cream);
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 5rem; align-items: center;
+  }
+  .booking h2 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: clamp(2.2rem, 4vw, 4rem);
+    font-weight: 700; line-height: 1.05;
+    margin-bottom: 1.5rem; letter-spacing: -0.02em;
+  }
+  .booking h2 em { font-style: italic; color: var(--terracotta); }
+  .booking p { font-size: 0.92rem; line-height: 1.8; color: var(--stone); margin-bottom: 2rem; }
+  .booking-info { display: flex; flex-direction: column; gap: 1.2rem; }
+  .booking-row {
+    display: flex; gap: 1.2rem; align-items: flex-start;
+    padding: 1.2rem;
+    background: white; border-radius: 6px;
+    border: 1px solid rgba(196,105,58,0.1);
+    transition: border-color 0.2s;
+  }
+  .booking-row:hover { border-color: rgba(196,105,58,0.3); }
+  .booking-icon { font-size: 1.4rem; flex-shrink: 0; }
+  .booking-row h4 { font-size: 0.85rem; font-weight: 600; margin-bottom: 0.2rem; }
+  .booking-row p { font-size: 0.8rem; color: var(--stone); line-height: 1.5; margin: 0; }
+
+  /* FOOTER */
+  footer {
+    background: var(--espresso); color: rgba(250,246,240,0.45);
+    padding: 2.5rem 4rem;
+    display: flex; align-items: center; justify-content: space-between;
+    border-top: 1px solid rgba(196,105,58,0.15);
+  }
+  .footer-logo {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1rem; font-weight: 700; color: var(--cream);
+    line-height: 1.3;
+  }
+  .footer-logo span { display: block; font-size: 0.6rem; font-weight: 400; letter-spacing: 0.18em; text-transform: uppercase; color: var(--terra-light); font-family: 'Raleway', sans-serif; margin-top: 0.2rem; }
+  .footer-links { display: flex; gap: 2rem; list-style: none; }
+  .footer-links a { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(250,246,240,0.35); text-decoration: none; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--terra-light); }
+  footer p { font-size: 0.75rem; }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { height: 280px; }
+    .hero-left { padding: 3rem 1.5rem; }
+    .services, .reviews, .team { padding: 4rem 1.5rem; }
+    .services-grid, .reviews-grid, .team-grid { grid-template-columns: 1fr; }
+    .about { grid-template-columns: 1fr; padding: 4rem 1.5rem; gap: 3rem; }
+    .booking { grid-template-columns: 1fr; padding: 4rem 1.5rem; gap: 3rem; }
+    .hero-meta { flex-wrap: wrap; gap: 1.5rem; }
+    footer { flex-direction: column; gap: 1.5rem; padding: 2rem 1.5rem; text-align: center; }
+    .footer-links { flex-wrap: wrap; justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">
+    La Maison Della Bellezza
+    <span>Bologna · Dal 2010</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#">Servizi</a></li>
+    <li><a href="#">Gallery</a></li>
+    <li><a href="#">Il Team</a></li>
+    <li><a href="#">Recensioni</a></li>
+    <li><a href="#">Contatti</a></li>
+  </ul>
+  <a href="#" class="nav-book">Prenota Ora</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-ornament">
+      <div class="ornament-line"></div>
+      <div class="ornament-diamond"></div>
+      <div class="ornament-text">Salone di Bellezza · Bologna</div>
+      <div class="ornament-diamond"></div>
+      <div class="ornament-line"></div>
+    </div>
+    <h1 class="hero-h1">
+      L'arte
+      <em>della bellezza.</em>
+      <span class="small">Via del Borgo di S. Pietro · Bologna</span>
+    </h1>
+    <div class="hero-divider"></div>
+    <p class="hero-p">
+      Sempre alla ricerca della perfezione. Il salone dove <strong>uomini e donne</strong> trovano il loro stile ideale — tagli, colori e trattamenti con passione e cura artigianale.
+    </p>
+    <div class="hero-actions">
+      <a href="#" class="btn-terra">Prenota Appuntamento</a>
+      <a href="#" class="btn-ghost">Scopri i Servizi</a>
+    </div>
+    <div class="hero-meta">
+      <div class="meta-item">
+        <div class="meta-val">4.9⭐</div>
+        <div class="meta-label">254 Recensioni</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-val">15+</div>
+        <div class="meta-label">Anni di Esperienza</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-val">100%</div>
+        <div class="meta-label">Artigianale</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-mosaic">
+      <div class="mosaic-block">
+        <span>💇‍♀️</span>
+        <div class="mosaic-label">Taglio Donna</div>
+      </div>
+      <div class="mosaic-block">
+        <span>✂️</span>
+        <div class="mosaic-label">Taglio Uomo</div>
+      </div>
+      <div class="mosaic-block">
+        <span>🎨</span>
+        <div class="mosaic-label">Colorazione</div>
+      </div>
+      <div class="mosaic-block">
+        <span>✨</span>
+        <div class="mosaic-label">Trattamenti</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="marquee-wrap">
+  <div class="marquee-inner">
+    SEMPRE ALLA RICERCA DELLA PERFEZIONE <span>◆</span> TAGLI · COLORI · TRATTAMENTI <span>◆</span> UOMO E DONNA <span>◆</span> 4.9 STELLE · 254 RECENSIONI <span>◆</span> VIA BORGO S. PIETRO · BOLOGNA <span>◆</span> PRENOTAZIONE ONLINE <span>◆</span> SEMPRE ALLA RICERCA DELLA PERFEZIONE <span>◆</span> TAGLI · COLORI · TRATTAMENTI <span>◆</span> UOMO E DONNA <span>◆</span> 4.9 STELLE · 254 RECENSIONI <span>◆</span>
+  </div>
+</div>
+
+<section class="services">
+  <div class="section-ornament"><div class="section-tag">I Nostri Servizi</div></div>
+  <h2 class="section-h2">Tutto per la tua <em>bellezza</em></h2>
+  <p class="section-sub">Ogni servizio è pensato per valorizzare la tua unicità — con prodotti di qualità e mani esperte.</p>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-num">01</div>
+      <div class="service-icon">💇‍♀️</div>
+      <div class="service-name">Taglio & Piega Donna</div>
+      <p class="service-desc">Tagli personalizzati per valorizzare la tua forma del viso e il tuo stile. Dalla piega liscia alle onde morbide.</p>
+      <div class="service-price">A partire da €35</div>
+    </div>
+    <div class="service-card">
+      <div class="service-num">02</div>
+      <div class="service-icon">✂️</div>
+      <div class="service-name">Taglio Uomo</div>
+      <p class="service-desc">Tagli classici e moderni per l'uomo contemporaneo. Fade, scissor cut, finishing professionale.</p>
+      <div class="service-price">A partire da €22</div>
+    </div>
+    <div class="service-card">
+      <div class="service-num">03</div>
+      <div class="service-icon">🎨</div>
+      <div class="service-name">Colorazione & Schiariture</div>
+      <p class="service-desc">Balayage, ombre, tinta piena — i nostri coloristi realizzano il colore dei tuoi sogni con prodotti premium.</p>
+      <div class="service-price">A partire da €60</div>
+    </div>
+    <div class="service-card">
+      <div class="service-num">04</div>
+      <div class="service-icon">💆‍♀️</div>
+      <div class="service-name">Trattamenti Capelli</div>
+      <p class="service-desc">Cheratina, trattamenti nutrienti, ricostruzione — per capelli sani, forti e luminosi.</p>
+      <div class="service-price">A partire da €45</div>
+    </div>
+    <div class="service-card">
+      <div class="service-num">05</div>
+      <div class="service-icon">👰</div>
+      <div class="service-name">Acconciature Sposa</div>
+      <p class="service-desc">Il giorno più bello merita il look perfetto. Prova inclusa e consulenza personalizzata per la sposa.</p>
+      <div class="service-price">A partire da €120</div>
+    </div>
+    <div class="service-card">
+      <div class="service-num">06</div>
+      <div class="service-icon">🌊</div>
+      <div class="service-name">Piega & Finishing</div>
+      <p class="service-desc">Una piega perfetta per ogni occasione. Liscia, voluminosa o ricci — come vuoi tu.</p>
+      <div class="service-price">A partire da €20</div>
+    </div>
+  </div>
+</section>
+
+<section class="about">
+  <div class="about-img">
+    <span>✂️</span>
+    <div class="about-badge">
+      <span class="num">4.9</span>
+      <span class="txt">Stelle Google</span>
+    </div>
+  </div>
+  <div class="about-content">
+    <div class="section-ornament"><div class="section-tag">La Nostra Storia</div></div>
+    <h2>Più di un salone.<br>È la tua <em>casa.</em></h2>
+    <p>La Maison Della Bellezza è nata dalla passione per l'arte del capello e dal desiderio di creare un luogo dove ogni cliente si senta accolto e valorizzato.</p>
+    <p>Con oltre 254 recensioni a 5 stelle e anni di esperienza nel cuore di Bologna, il nostro team porta dedizione e creatività in ogni appuntamento.</p>
+    <div class="about-features">
+      <div class="feature"><div class="feature-dot"></div><p>Prodotti professionali di alta qualità selezionati con cura</p></div>
+      <div class="feature"><div class="feature-dot"></div><p>Formazione continua per restare sempre aggiornati sulle ultime tendenze</p></div>
+      <div class="feature"><div class="feature-dot"></div><p>Ambiente accogliente e familiare nel cuore di Bologna</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="team">
+  <div class="section-ornament"><div class="section-tag">Il Nostro Team</div></div>
+  <h2 class="section-h2">Mani <em>esperte,</em> cuore appassionato</h2>
+  <p class="section-sub">Ogni membro del team porta talento unico e dedizione totale al proprio lavoro.</p>
+  <div class="team-grid">
+    <div class="team-card">
+      <div class="team-avatar">👨‍🎨</div>
+      <div class="team-name">Giuseppe</div>
+      <div class="team-role">Fondatore & Stylist</div>
+      <p class="team-desc">Sempre alla ricerca della perfezione. Specialista in tagli tecnici e colorazioni creative.</p>
+    </div>
+    <div class="team-card">
+      <div class="team-avatar">👩‍🎨</div>
+      <div class="team-name">Valentina</div>
+      <div class="team-role">Colorista Senior</div>
+      <p class="team-desc">Esperta in balayage e colorazioni naturali. Trasforma ogni capello in un'opera d'arte.</p>
+    </div>
+    <div class="team-card">
+      <div class="team-avatar">✂️</div>
+      <div class="team-name">Marco</div>
+      <div class="team-role">Barbiere & Stylist</div>
+      <p class="team-desc">Specializzato in tagli uomo moderni e classici. Il tocco maschile del nostro team.</p>
+    </div>
+  </div>
+</section>
+
+<section class="reviews">
+  <div class="section-ornament"><div class="section-tag">Recensioni</div></div>
+  <h2 class="section-h2">Cosa dicono i <em>clienti</em></h2>
+  <div class="reviews-grid">
+    <div class="review-card">
+      <div class="review-quote">"</div>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"Il miglior salone di Bologna, senza dubbio. Giuseppe ha un talento incredibile — capisce esattamente cosa vuoi e lo realizza alla perfezione."</p>
+      <div class="review-author">Giulia M.</div>
+      <div class="review-city">Bologna</div>
+    </div>
+    <div class="review-card">
+      <div class="review-quote">"</div>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"Vengo qui da due anni e non andrei mai da un'altra parte. L'atmosfera è bellissima e il taglio è sempre impeccabile. Consiglio vivamente!"</p>
+      <div class="review-author">Luca R.</div>
+      <div class="review-city">Bologna</div>
+    </div>
+    <div class="review-card">
+      <div class="review-quote">"</div>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"Ho fatto l'acconciatura da sposa qui e sono rimasta senza parole. La prova è stata accuratissima e il giorno del matrimonio ero perfetta!"</p>
+      <div class="review-author">Sofia C.</div>
+      <div class="review-city">Bologna</div>
+    </div>
+  </div>
+</section>
+
+<section class="booking">
+  <div>
+    <div class="section-ornament"><div class="section-tag">Prenota</div></div>
+    <h2>Pronto per il tuo nuovo <em>look?</em></h2>
+    <p>Prenota il tuo appuntamento online in pochi secondi. Non vediamo l'ora di accoglierti nel nostro salone.</p>
+    <a href="#" class="btn-terra">Prenota Subito</a>
+  </div>
+  <div class="booking-info">
+    <div class="booking-row">
+      <div class="booking-icon">📍</div>
+      <div>
+        <h4>Dove Siamo</h4>
+        <p>Via del Borgo di S. Pietro, 99/B<br>40126 Bologna BO, Italia</p>
+      </div>
+    </div>
+    <div class="booking-row">
+      <div class="booking-icon">🕐</div>
+      <div>
+        <h4>Orari</h4>
+        <p>Mar–Sab: 9:30 – 19:00<br>Dom–Lun: Chiuso</p>
+      </div>
+    </div>
+    <div class="booking-row">
+      <div class="booking-icon">📞</div>
+      <div>
+        <h4>Telefono & WhatsApp</h4>
+        <p>+39 051 246449<br>Chiamaci o scrivici su WhatsApp</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">
+    La Maison Della Bellezza
+    <span>Bologna · Via Borgo S. Pietro</span>
+  </div>
+  <ul class="footer-links">
+    <li><a href="#">Servizi</a></li>
+    <li><a href="#">Gallery</a></li>
+    <li><a href="#">Prenota</a></li>
+    <li><a href="#">Contatti</a></li>
+  </ul>
+  <p>© 2025 La Maison Della Bellezza · Bologna</p>
+</footer>
+
+<script>
+  // Scroll reveal
+  const cards = document.querySelectorAll('.service-card');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 100);
+      }
+    });
+  }, { threshold: 0.1 });
+  cards.forEach(c => observer.observe(c));
+</script>
+</body>
+</html>
